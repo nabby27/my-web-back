@@ -24,6 +24,8 @@ jobs:
       run: npm install
     - name: Run tslint
       run: npm run tslint
+    - name: Run app for test
+      run: npm run build && node dist/app/server.js 2> /dev/null
     - name: Run test
       run: npm run test:all
       env:
