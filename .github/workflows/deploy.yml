@@ -27,7 +27,7 @@ jobs:
     - name: Run test
       run: |
       npm run build
-      npm run start & npm run test:all
+      npm run start && npm run test:all
 
     - name: Make envfile
       uses: SpicyPizza/create-envfile@v1
