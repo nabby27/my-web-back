@@ -42,6 +42,8 @@ jobs:
         command: |
           cd ${{ secrets.SERVER_TARGET_FOLDER }}
           sudo rm -rf *
+          cd ..
+          sudo git clone https://github.com/nabby27/my-web-back.git
         host: ${{ secrets.SERVER_HOST }}
         user: ${{ secrets.SERVER_USER }}
         key: ${{ secrets.SERVER_SSH_KEY}}
@@ -59,7 +61,7 @@ jobs:
     #       sudo rm -rf my-web-back
     #       cd back
     #       touch .env
-    #       echo EMAIL=${{ secrets.EMAIL_TO_SEND_MAIL }} >> .env
+    #       echo EMAIL=${{ secrets.EMAIL_TO_SEND_MAIL }} > .env
     #       echo PASSWORD_EMAIL=${{ secrets.SECRET_PASSWORD_EMAIL }} >> .env
     #       npm run build
     #       npm run start
