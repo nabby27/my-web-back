@@ -24,10 +24,9 @@ jobs:
       env:
         EMAIL: ${{ secrets.EMAIL_TO_SEND_MAIL }}
         PASSWORD_EMAIL: ${{ secrets.SECRET_PASSWORD_EMAIL }}
-    - name: Run app for test
-      run: npm run dev
     - name: Run test
-      run: npm run test:all
+      run: npm run build
+      run: npm run start & npm run test:all
 
     - name: Make envfile
       uses: SpicyPizza/create-envfile@v1
