@@ -44,6 +44,8 @@ jobs:
           sudo rm -rf *
           cd ..
           sudo git clone https://github.com/nabby27/my-web-back.git
+          sudo mv my-web-back/* back/
+          sudo rm -rf my-web-back
         host: ${{ secrets.SERVER_HOST }}
         user: ${{ secrets.SERVER_USER }}
         key: ${{ secrets.SERVER_SSH_KEY}}
