@@ -48,6 +48,7 @@ jobs:
           sudo rm -rf my-web-back
           sudo chown -R ${{ secrets.SERVER_USER }}:${{ secrets.SERVER_USER }} back
           cd back
+          npm run install
           npm run build
           npm run start
         host: ${{ secrets.SERVER_HOST }}
