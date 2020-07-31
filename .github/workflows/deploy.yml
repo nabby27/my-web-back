@@ -6,28 +6,43 @@ on:
       - master
 
 jobs:
-  deploy:
+  test:
 
     runs-on: ubuntu-18.04
 
+    strategy:
+      matrix:
+        node-version: [12.x, 13.11.x, 14.x]
+
     steps:
     - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: Install dependencies
+      run: npm install
+    - name: Run tslint
+      run: npm run tslint
+    - name: Run test
+      run: npm run test:all
+      env:
+        CI: true
 
+  deploy:
+    needs: [test]
+    runs-on: ubuntu-18.04
+
+    steps:
     - name: Install Node.js
       uses: actions/setup-node@v1
       with:
         node-version: '13.11.x'
     - name: Install dependencies
       run: npm install
-    - name: Run tslinter
-      run: npm run tslint
       env:
         EMAIL: ${{ secrets.EMAIL_TO_SEND_MAIL }}
         PASSWORD_EMAIL: ${{ secrets.SECRET_PASSWORD_EMAIL }}
-    - name: Run test
-      run: |
-      npm run build
-      npm run start && npm run test:all
 
     - name: Make envfile
       uses: SpicyPizza/create-envfile@v1
