@@ -40,7 +40,11 @@ jobs:
       uses: fifsky/ssh-action@master
       with:
         command: |
+          cd ${{ secrets.SERVER_TARGET_FOLDER }}
+          cd ..
           git clone https://github.com/nabby27/my-web-back.git
+          mv my-web-back back
+          cd back
           touch .env
           echo EMAIL=${{ secrets.EMAIL_TO_SEND_MAIL }} >> .env
           echo PASSWORD_EMAIL=${{ secrets.SECRET_PASSWORD_EMAIL }} >> .env
