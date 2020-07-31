@@ -36,37 +36,16 @@ jobs:
     runs-on: ubuntu-18.04
 
     steps:
-    - name: Install Node.js
-      uses: actions/setup-node@v1
-      with:
-        node-version: '13.11.x'
-    - name: Install dependencies
-      run: npm install
-      env:
-        EMAIL: ${{ secrets.EMAIL_TO_SEND_MAIL }}
-        PASSWORD_EMAIL: ${{ secrets.SECRET_PASSWORD_EMAIL }}
-
-    - name: Make envfile
-      uses: SpicyPizza/create-envfile@v1
-      with:
-        EMAIL: ${{ secrets.EMAIL_TO_SEND_MAIL }}
-        PASSWORD_EMAIL: ${{ secrets.SECRET_PASSWORD_EMAIL }}
-        file_name: .env
-
-    - name: Deploy to server
-      uses: easingthemes/ssh-deploy@v2.1.1
-      env:
-          SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
-          ARGS: "-rltgoDzvO --delete"
-          REMOTE_HOST: ${{ secrets.SERVER_HOST }}
-          REMOTE_USER: ${{ secrets.SERVER_USER }}
-          TARGET: ${{ secrets.SERVER_TARGET_FOLDER }}
-
     - name: Start back
       uses: fifsky/ssh-action@master
       with:
         command: |
-          cd ${{ secrets.SERVER_TARGET_FOLDER }} && npm run start && npm run start
+          git clone https://github.com/nabby27/my-web-back.git
+          touch .env
+          echo EMAIL=${{ secrets.EMAIL_TO_SEND_MAIL }} >> .env
+          echo PASSWORD_EMAIL=${{ secrets.SECRET_PASSWORD_EMAIL }} >> .env
+          npm run build
+          npmm run start
         host: ${{ secrets.SERVER_HOST }}
         user: ${{ secrets.SERVER_USER }}
         key: ${{ secrets.SERVER_SSH_KEY}}
