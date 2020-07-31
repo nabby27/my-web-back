@@ -1,4 +1,4 @@
-name: Deploy ssr on production server
+name: Deploy on production server
 
 on: 
   push:
