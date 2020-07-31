@@ -1,5 +1,5 @@
-import { ContactForm } from '../entities/contactForm.entity';
 import { MailRepository } from '../repositories/mailRepository';
+import { ContactForm } from '../vo/contactForm';
 
 export class SendMailAction {
 

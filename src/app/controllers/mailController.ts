@@ -14,7 +14,7 @@ export class MailController {
     const dataMail = req.body;
     this.sendMailAction.execute(dataMail)
       .then((data) => {
-        res.status(200).send(data);
+        res.status(200).send({ isSent: data });
       })
       .catch(() => {
         res.status(500).send({ error: 'Can\'t send the mail' });

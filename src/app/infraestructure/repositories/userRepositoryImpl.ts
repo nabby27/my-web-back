@@ -1,7 +1,7 @@
 import * as dotenv from 'dotenv';
 import * as nodemailer from 'nodemailer';
-import { ContactForm } from '../../domain/mail/entities/contactForm.entity';
 import { MailRepository } from '../../domain/mail/repositories/mailRepository';
+import { ContactForm } from '../../domain/mail/vo/contactForm';
 
 dotenv.config();
 

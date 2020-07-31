@@ -1,4 +1,4 @@
-import { ContactForm } from '../entities/contactForm.entity';
+import { ContactForm } from '../vo/contactForm';
 
 export interface MailRepository {
 

@@ -1,0 +1,56 @@
+name: Deploy ssr on production server
+
+on: 
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+
+    runs-on: ubuntu-18.04
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Install Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: '13.11.x'
+    - name: Install dependencies
+      run: npm install
+    - name: Run tslinter
+      run: npm run tslint
+      env:
+        EMAIL: ${{ secrets.EMAIL_TO_SEND_MAIL }}
+        PASSWORD_EMAIL: ${{ secrets.SECRET_PASSWORD_EMAIL }}
+    - name: Run app for test
+      run: npm run dev
+    - name: Run test
+      run: npm run test:all
+
+    - name: Make envfile
+      uses: SpicyPizza/create-envfile@v1
+      with:
+        EMAIL: ${{ secrets.EMAIL_TO_SEND_MAIL }}
+        PASSWORD_EMAIL: ${{ secrets.SECRET_PASSWORD_EMAIL }}
+        file_name: .env
+
+    - name: Deploy to server
+      uses: easingthemes/ssh-deploy@v2.1.1
+      env:
+          SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
+          ARGS: "-rltgoDzvO --delete"
+          SOURCE: "./"
+          REMOTE_HOST: ${{ secrets.SERVER_HOST }}
+          REMOTE_USER: ${{ secrets.SERVER_USER }}
+          TARGET: ${{ secrets.SERVER_TARGET_FOLDER }}
+
+    - name: Start back
+      uses: fifsky/ssh-action@master
+      with:
+        command: |
+          cd ${{ secrets.SERVER_TARGET_FOLDER }} && npm run start
+        host: ${{ secrets.SERVER_HOST }}
+        user: ${{ secrets.SERVER_USER }}
+        key: ${{ secrets.SERVER_SSH_KEY}}

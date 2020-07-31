@@ -1,5 +1,5 @@
 import { SendMailAction } from '../../app/domain/mail/actions/sendMailAction';
-import { ContactForm } from '../../app/domain/mail/entities/contactForm.entity';
+import { ContactForm } from '../../app/domain/mail/vo/contactForm';
 import { MailRepositoryInMemory } from './repositories/mailRepositoryInMemory';
 
 describe('Unit test to Send Mail', () => {

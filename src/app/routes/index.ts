@@ -3,7 +3,7 @@ import { MailController } from '../controllers/mailController';
 
 const router: Router = express.Router();
 
-router.get('/', (req: Request, res: Response) => {
+router.get('/', (_req: Request, res: Response) => {
   res.send({ message: 'Wellcome to my node API' });
 });
 
