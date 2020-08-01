@@ -4,7 +4,7 @@ import { MailController } from '../controllers/mailController';
 const router: Router = express.Router();
 
 router.get('/', (_req: Request, res: Response) => {
-  res.send({ message: 'Wellcome to my node API by CI/CD' });
+  res.send({ message: 'Wellcome to my node API' });
 });
 
 router.post('/sendMail', (req: Request, res: Response) => {

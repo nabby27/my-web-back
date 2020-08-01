@@ -6,37 +6,36 @@ on:
       - master
 
 jobs:
-  # test:
+  test:
 
-  #   runs-on: ubuntu-18.04
+    runs-on: ubuntu-18.04
 
-  #   strategy:
-  #     matrix:
-  #       node-version: [12.x, 13.11.x, 14.x]
+    strategy:
+      matrix:
+        node-version: [12.x, 13.11.x, 14.x]
 
-  #   steps:
-  #   - uses: actions/checkout@v2
-  #   - name: Use Node.js ${{ matrix.node-version }}
-  #     uses: actions/setup-node@v1
-  #     with:
-  #       node-version: ${{ matrix.node-version }}
-  #   - name: Install dependencies
-  #     run: npm install
-  #   - name: Run tslint
-  #     run: npm run tslint
-  #   - name: Run app for test
-  #     run: npm run build && node dist/app/server.js 2> /dev/null
-  #   - name: Run test
-  #     run: npm run test:all
-  #     env:
-  #       CI: true
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: Install dependencies
+      run: npm install
+    - name: Run tslint
+      run: npm run tslint
+    - name: Run app for test
+      run: npm run build && node dist/app/server.js > /dev/null
+    - name: Run test
+      run: npm run test:all
 
   deploy:
-    # needs: [test]
+    needs: [test]
     runs-on: ubuntu-18.04
 
     steps:
-    - name: Start back
+    - uses: actions/checkout@v2
+    - name: Deploy
       uses: fifsky/ssh-action@master
       with:
         command: |
@@ -54,24 +53,3 @@ jobs:
         host: ${{ secrets.SERVER_HOST }}
         user: ${{ secrets.SERVER_USER }}
         key: ${{ secrets.SERVER_SSH_KEY}}
-
-
-    # - name: Start back
-    #   uses: fifsky/ssh-action@master
-    #   with:
-    #     command: |
-    #       cd ${{ secrets.SERVER_TARGET_FOLDER }}
-    #       sudo rm -rf *
-    #       cd ..
-    #       sudo git clone https://github.com/nabby27/my-web-back.git
-    #       sudo mv my-web-back/* back/
-    #       sudo rm -rf my-web-back
-    #       cd back
-    #       touch .env
-    #       echo EMAIL=${{ secrets.EMAIL_TO_SEND_MAIL }} > .env
-    #       echo PASSWORD_EMAIL=${{ secrets.SECRET_PASSWORD_EMAIL }} >> .env
-    #       npm run build
-    #       npm run start
-    #     host: ${{ secrets.SERVER_HOST }}
-    #     user: ${{ secrets.SERVER_USER }}
-    #     key: ${{ secrets.SERVER_SSH_KEY}}
