@@ -3,7 +3,7 @@ import express, { Application } from 'express';
 import routes from './routes';
 
 const app: Application = express();
-const port = process.env.PORT;
+const port = process.env.PORT || 8080;
 
 app.use((_req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
