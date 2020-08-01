@@ -50,7 +50,7 @@ jobs:
           cd back
           npm install
           npm run build
-          npm rnu start
+          npm run start
         host: ${{ secrets.SERVER_HOST }}
         user: ${{ secrets.SERVER_USER }}
         key: ${{ secrets.SERVER_SSH_KEY}}
