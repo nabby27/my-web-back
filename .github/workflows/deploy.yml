@@ -12,7 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [12.x, 13.11.x, 14.x]
+        node-version: [13.11.x, 14.x]
 
     steps:
     - uses: actions/checkout@v2
@@ -27,6 +27,7 @@ jobs:
     - name: Run app for test
       uses: cypress-io/github-action@v2
       with:
+        parallel: true
         env: EMAIL=${{ secrets.EMAIL_TO_SEND_MAIL }},PASSWORD_EMAIL=${{ secrets.SECRET_PASSWORD_EMAIL }},PORT=8080
         build: npm run build
         start: npm run start
