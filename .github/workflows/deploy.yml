@@ -26,13 +26,13 @@ jobs:
       run: npm run tslint
     - name: Run app for test
       uses: cypress-io/github-action@v2
-        with:
-          env: EMAIL=${{ secrets.EMAIL_TO_SEND_MAIL }},PASSWORD_EMAIL=${{ secrets.SECRET_PASSWORD_EMAIL }},PORT=8080
-          build: npm run build
-          start: npm run start
-          wait-on: 'http://localhost:8080'
-          wait-on-timeout: 120
-          command: npm run test:all
+      with:
+        env: EMAIL=${{ secrets.EMAIL_TO_SEND_MAIL }},PASSWORD_EMAIL=${{ secrets.SECRET_PASSWORD_EMAIL }},PORT=8080
+        build: npm run build
+        start: npm run start
+        wait-on: 'http://localhost:8080'
+        wait-on-timeout: 120
+        command: npm run test:all
     - name: Run test
       run: npm run test:all
 
