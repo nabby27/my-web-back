@@ -40,7 +40,6 @@ jobs:
       uses: fifsky/ssh-action@master
       with:
         command: |
-          sudo killall -s KILL node
           cd ${{ secrets.SERVER_TARGET_FOLDER }}
           sudo rm -rf *
           cd ..
@@ -51,7 +50,7 @@ jobs:
           cd back
           npm install
           npm run build
-          npm run start
+          pm2 restart 3
         host: ${{ secrets.SERVER_HOST }}
         user: ${{ secrets.SERVER_USER }}
         key: ${{ secrets.SERVER_SSH_KEY}}

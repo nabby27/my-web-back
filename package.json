@@ -4,7 +4,7 @@
   "description": "",
   "main": "dist/app/server.js",
   "scripts": {
-    "start": "node dist/app/server.js > /dev/null",
+    "start": "node dist/app/server.js",
     "dev": "nodemon src/app/server.ts",
     "build": "rm -rf ./dist && tsc",
     "tslint": "./node_modules/.bin/tslint --project .",
