@@ -1,4 +1,3 @@
-import bodyParser from 'body-parser';
 import express, { Application } from 'express';
 import routes from './routes';
 
@@ -13,8 +12,8 @@ app.use((_req, res, next) => {
   next();
 });
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.use('/api', routes);
 
