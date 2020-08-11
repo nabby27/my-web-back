@@ -9,7 +9,8 @@
     "build": "rm -rf ./dist && tsc",
     "tslint": "./node_modules/.bin/tslint --project .",
     "test:unit": "./node_modules/jasmine/bin/jasmine.js JASMINE_CONFIG_PATH=jasmine.json",
-    "test:all": "npm run test:unit"
+    "test:e2e": "npx cypress run --spec 'cypress/integration/app/**/*'",
+    "test:all": "npm run test:unit && npm run test:e2e"
   },
   "author": "Iván Córdoba Donet",
   "license": "MIT",
@@ -26,6 +27,7 @@
     "@types/mysql": "^2.15.15",
     "@types/node": "^12.12.53",
     "@types/nodemailer": "^6.4.0",
+    "cypress": "^4.12.1",
     "jasmine": "^3.6.1",
     "nodemon": "^2.0.4",
     "ts-node": "^8.10.2",

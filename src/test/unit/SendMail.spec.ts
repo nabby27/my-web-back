@@ -17,7 +17,9 @@ describe('Unit test to Send Mail', () => {
       message: '',
     };
 
-    sendMailAction.execute(data);
+    const isMailSended = await sendMailAction.execute(data);
+
+    expect(isMailSended).toBe(true);
   });
 
 });
