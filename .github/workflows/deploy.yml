@@ -25,9 +25,9 @@ jobs:
     - name: Run tslint
       run: npm run tslint
       env:
-          EMAIL: ${{ secrets.EMAIL_TO_SEND_MAIL }}
-          PASSWORD_EMAIL: ${{secrets.SECRET_PASSWORD_EMAIL }}
-          PORT: 8080
+        EMAIL: ${{ secrets.EMAIL_TO_SEND_MAIL }}
+        PASSWORD_EMAIL: ${{secrets.SECRET_PASSWORD_EMAIL }}
+        PORT: 8080
     - name: Run test
       uses: cypress-io/github-action@v2
       with:
