@@ -9,7 +9,7 @@
     "build": "rm -rf ./dist && tsc",
     "tslint": "./node_modules/.bin/tslint --project .",
     "test:unit": "./node_modules/jasmine/bin/jasmine.js JASMINE_CONFIG_PATH=jasmine.json",
-    "test:e2e": "npx cypress run --spec 'cypress/integration/app/**/*'",
+    "test:e2e": "./node_modules/cypress/bin/cypress run --spec 'cypress/integration/app/**/*'",
     "test:all": "npm run test:unit && npm run test:e2e"
   },
   "author": "Iván Córdoba Donet",
