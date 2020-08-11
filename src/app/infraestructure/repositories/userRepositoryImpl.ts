@@ -35,6 +35,7 @@ export class MailRepositoryImpl implements MailRepository {
     return new Promise((resolve, reject) => {
       transporter.sendMail(mailOptions, (error) => {
         if (error) {
+          console.log(error);
           reject(false);
         } else {
           resolve(true);
