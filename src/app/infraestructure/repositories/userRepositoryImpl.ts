@@ -11,11 +11,6 @@ export class MailRepositoryImpl implements MailRepository {
   }
 
   async sendMail(data: ContactForm): Promise<boolean> {
-    console.log(process.env.EMAIL);
-    console.log(process.env.PASSWORD_EMAIL);
-    console.log(process.env.EMAIL_TO_SEND_MAIL);
-    console.log(process.env.SECRET_PASSWORD_EMAIL);
-
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
